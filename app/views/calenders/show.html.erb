@@ -2,8 +2,31 @@
 
 <p>
   <strong>Month:</strong>
-  <%= @calender.month %>
+  <%= Time.local(@calender.year, @calender.month, 1).strftime('%B') %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Day</th>
+    <th>In</th>
+    <th>Out</th>
+    <th>Diff</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @calender.days.each do |day| %>
+      <tr>
+        <% time = Time.local(@calender.year, @calender.month, day.name)%>
+        <td><%= day.name %>/<%= @calender.month%><br/> <%= time.strftime('%a')%></td>
+        <td><%= text_field_tag :in%></td>
+        <td><%= text_field_tag :out%></td>
+        <td>-</td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
 </p>
 
-<%= link_to 'Edit', edit_calender_path(@calender) %> |
 <%= link_to 'Back', calenders_path %>

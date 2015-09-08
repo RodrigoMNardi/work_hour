@@ -6,9 +6,11 @@ class CalendersController < ApplicationController
   # GET /calenders.json
   def index
     @calenders = Calender.all
-    if @calenders.empty? or !@calenders.find(Time.now.strftime('%B'))
+    if @calenders.empty? or !@calenders.where(year: Time.now.strftime('%Y').to_i).size != 12
       new
     end
+
+    @calenders = Calender.all
   end
 
   # GET /calenders/1
@@ -18,13 +20,21 @@ class CalendersController < ApplicationController
 
   # GET /calenders/new
   def new
-    @calender = Calender.new
-    @calender.month = Time.now.strftime('%B')
-    1.upto(Time.now.end_of_month.day) do |day|
-      puts day
-    end
+    1.upto 12 do |month|
+      @calender = Calender.new
+      m = Time.local(Time.now.year, month, 1).strftime('%m')
+      y = Time.local(Time.now.year, month, 1).strftime('%Y')
 
-    #@calender.save
+      next unless Calender.where(month: m, year: y).empty?
+
+      @calender.month = m
+      @calender.year  = y
+
+      1.upto(Time.now.end_of_month.day) do |day|
+        @calender.days << Day.new(name: day.to_i)
+      end
+      @calender.save
+    end
   end
 
   # GET /calenders/1/edit
