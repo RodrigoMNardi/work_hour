@@ -1,11 +1,12 @@
 <h1>Listing work_days</h1>
 
+<%= @day%>/<%= @month%>/<%= @year%>
+
 <table>
   <thead>
     <tr>
       <th>In hour</th>
       <th>Out hour</th>
-      <th>Weekend</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,11 +14,9 @@
   <tbody>
     <% @work_days.each do |work_day| %>
       <tr>
-        <td><%= work_day.in_hour %></td>
-        <td><%= work_day.out_hour %></td>
-        <td><%= work_day.weekend %></td>
-        <td><%= link_to 'Show', work_day %></td>
-        <td><%= link_to 'Edit', edit_work_day_path(work_day) %></td>
+        <td><%= work_day.in_hour.strftime('%H:%M') %></td>
+        <td><%= work_day.out_hour.strftime('%H:%M') %></td>
+        <td><%= link_to 'Edit', edit_work_day_path(work_day, day: @day, month: @month, year: @year) %></td>
         <td><%= link_to 'Destroy', work_day, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -26,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Work day', new_work_day_path %>
+<%= link_to 'New Work day', controller: 'work_days', action: 'new', day: @day, month: @month, year: @year %>

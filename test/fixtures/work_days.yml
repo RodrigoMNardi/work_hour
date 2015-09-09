@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  in_hour: 2015-09-08 10:30:20
+  out_hour: 2015-09-08 10:30:20
+  weekend: 1
+
+two:
+  in_hour: 2015-09-08 10:30:20
+  out_hour: 2015-09-08 10:30:20
+  weekend: 1

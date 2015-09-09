@@ -1,7 +1,12 @@
-<%= form_for(@work_day) do |f| %>
+<%if method_mode.nil?%>
+    <%form = work_day_path(day: @day, month: @month, year: @year)%>
+<%else%>
+    <%form =work_days_path(day: @day, month: @month, year: @year)%>
+<%end%>
+<%= form_for(@work_day, url: form) do |f|%>
   <% if @work_day.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@work_day.errors.count, "error") %> prohibited this work_day from being saved:</h2>
+      <h2><%= pluralize(@work_day.errors.count, 'error') %> prohibited this work_day from being saved:</h2>
 
       <ul>
       <% @work_day.errors.full_messages.each do |message| %>
@@ -20,8 +25,8 @@
     <%= f.time_select :out_hour %>
   </div>
   <div class="field">
-    <%= f.label :weekend %><br>
-    <%= f.number_field :weekend %>
+    <%= f.label :lunch %><br>
+    <%= f.time_select :lunch, {:default => {:hour => '1', :minute => '0'}} %>
   </div>
   <div class="actions">
     <%= f.submit %>

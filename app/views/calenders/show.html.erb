@@ -8,9 +8,9 @@
   <thead>
   <tr>
     <th>Day</th>
-    <th>In</th>
-    <th>Out</th>
+    <th>Entries</th>
     <th>Diff</th>
+    <th></th>
   </tr>
   </thead>
 
@@ -19,9 +19,21 @@
       <tr>
         <% time = Time.local(@calender.year, @calender.month, day.name)%>
         <td><%= day.name %>/<%= @calender.month%><br/> <%= time.strftime('%a')%></td>
-        <td><%= text_field_tag :in%></td>
-        <td><%= text_field_tag :out%></td>
-        <td>-</td>
+        <%total = 0%>
+        <%day.work_days.each do |entry|%>
+            <td><%= entry.in_hour.strftime('%H:%M')%></td>
+            <td><%= entry.out_hour.strftime('%H:%M')%></td>
+            <td><%= entry.lunch.strftime('%H:%M')%></td>
+            <%interval = entry.lunch.hour + entry.lunch.min / 60.0%>
+            <%total += TimeDifference.between(entry.in_hour, entry.out_hour).in_hours - interval%>
+        <%end%>
+        <td><%= total%></td>
+        <%if day.work_days.empty?%>
+            <td>-</td>
+        <%end%>
+
+        <td><%= link_to 'New entry', controller: 'work_days', action: 'index',
+                                        day: day.name, month: @calender.month, year: @calender.year%></td>
       </tr>
   <% end %>
   </tbody>

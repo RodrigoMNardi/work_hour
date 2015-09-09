@@ -2,18 +2,18 @@
 
 <p>
   <strong>In hour:</strong>
-  <%= @work_day.in_hour %>
+  <%= @work_day.in_hour.strftime('%H:%M') %>
 </p>
 
 <p>
   <strong>Out hour:</strong>
-  <%= @work_day.out_hour %>
+  <%= @work_day.out_hour.strftime('%H:%M') %>
 </p>
 
 <p>
-  <strong>Weekend:</strong>
-  <%= @work_day.weekend %>
+  <strong>Lunch:</strong>
+  <%= @work_day.lunch.strftime('%H:%M') %>
 </p>
 
-<%= link_to 'Edit', edit_work_day_path(@work_day) %> |
-<%= link_to 'Back', work_days_path %>
+<%= link_to 'Edit', edit_work_day_path %> |
+<%= link_to 'Back', controller: 'work_days', action: 'index', day: @day, month: @month, year: @year %>

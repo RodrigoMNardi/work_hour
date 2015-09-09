@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  password: MyString
+  hour: 2015-09-08 10:14:55
+  week: MyString
+  string: MyString
+
+two:
+  name: MyString
+  password: MyString
+  hour: 2015-09-08 10:14:55
+  week: MyString
+  string: MyString

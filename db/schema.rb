@@ -40,9 +40,10 @@ ActiveRecord::Schema.define(version: 20150908133020) do
   create_table "work_days", force: true do |t|
     t.time     "in_hour"
     t.time     "out_hour"
-    t.integer  "weekend"
+    t.time     "lunch"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "day_id"
   end
 
 end
