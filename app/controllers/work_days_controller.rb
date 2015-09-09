@@ -81,9 +81,12 @@ class WorkDaysController < ApplicationController
   # DELETE /work_days/1
   # DELETE /work_days/1.json
   def destroy
+    day_id      = @work_day.day_id
+    calender_id = Day.find(day_id).calender_id
+
     @work_day.destroy
     respond_to do |format|
-      format.html { redirect_to controller: 'calenders', action: 'show', id: calender.id,
+      format.html { redirect_to controller: 'calenders', action: 'show', id: calender_id,
                                 notice: 'Work day was successfully destroyed.' }
       format.json { head :no_content }
     end
