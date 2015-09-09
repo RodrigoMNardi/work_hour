@@ -1,7 +1,7 @@
 <%if method_mode.nil?%>
-    <%form = work_day_path(day: @day, month: @month, year: @year)%>
+    <%form = work_days_path(day: @day, month: @month, year: @year)%>
 <%else%>
-    <%form =work_days_path(day: @day, month: @month, year: @year)%>
+    <%form = work_day_path(day: @day, month: @month, year: @year)%>
 <%end%>
 <%= form_for(@work_day, url: form) do |f|%>
   <% if @work_day.errors.any? %>
