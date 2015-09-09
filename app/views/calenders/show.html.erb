@@ -21,16 +21,11 @@
         <td><%= day.name %>/<%= @calender.month%><br/> <%= time.strftime('%a')%></td>
         <%total = 0%>
         <%day.work_days.each do |entry|%>
-            <td><%= entry.in_hour.strftime('%H:%M')%></td>
-            <td><%= entry.out_hour.strftime('%H:%M')%></td>
-            <td><%= entry.lunch.strftime('%H:%M')%></td>
             <%interval = entry.lunch.hour + entry.lunch.min / 60.0%>
             <%total += TimeDifference.between(entry.in_hour, entry.out_hour).in_hours - interval%>
         <%end%>
-        <td><%= total%></td>
-        <%if day.work_days.empty?%>
-            <td>-</td>
-        <%end%>
+        <td><%= day.work_days.size%></td>
+        <td><%= total%> hour(s)</td>
 
         <td><%= link_to 'New entry', controller: 'work_days', action: 'index',
                                         day: day.name, month: @calender.month, year: @calender.year%></td>
